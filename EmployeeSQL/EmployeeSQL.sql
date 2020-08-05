@@ -61,13 +61,13 @@ SELECT e.emp_no, e.first_name, e.last_name, e.sex, s.salary
 FROM employees e
 LEFT JOIN salaries s ON e.emp_no = s.emp_no;
 
---view employees hired before 1986  -- need help on this
+--view employees hired before 1986
 SELECT first_name, last_name, hire_date
 FROM employees 
-WHERE hire_date LIKE '1986%';
+WHERE hire_date BETWEEN '1986-01-01' AND '1986-12-31';
 
-SELECT CAST(hire_date AS DATE)
-FROM employees;
+SELECT *
+From employees
 
 ---List manager of each department with department name, number, manager's employee number and name & create View
 CREATE VIEW manager_departments AS
@@ -119,3 +119,10 @@ FROM employees
 GROUP BY last_name
 ORDER BY last_name DESC;
 
+--Had to check the given Employee ID - very funny
+SELECT e.emp_no, e.first_name, e.last_name,s.salary, t.title
+FROM employees e
+LEFT JOIN salaries s ON e.emp_no = s.emp_no
+LEFT JOIN titles t ON e.emp_title_id = t.title_id
+WHERE e.emp_no = 499942
+ORDER BY t.title;
